@@ -1,8 +1,11 @@
 package myspring.di.annot;
 
-public class ConsolePrinter implements Printer {
+import org.springframework.stereotype.Component;
+
+@Component("consolePrinter")
+public class ConsolePrinterBean implements PrinterBean {
 	
-	public ConsolePrinter() {
+	public ConsolePrinterBean() {
 		System.out.println(this.getClass().getName() + " 기본생성자 호출됨!");
 	}
 	
