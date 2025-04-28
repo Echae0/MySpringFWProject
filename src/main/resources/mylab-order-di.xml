@@ -4,21 +4,21 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-    <!-- Product 1: Setter 주입 -->
+	
+	<!-- Product 빈 정의 -->
     <bean id="product1" class="mylab.order.di.xml.Product">
         <property name="id" value="P001"/>
         <property name="name" value="노트북"/>
-        <property name="price" value="1200000"/>
+        <property name="price" value="1500000"/>
     </bean>
-
-    <!-- Product 2: Constructor 주입 -->
+    
     <bean id="product2" class="mylab.order.di.xml.Product">
-        <constructor-arg value="P002"/>
-        <constructor-arg value="모니터"/>
-        <constructor-arg value="300000"/>
+    	<constructor-arg name="id" value="P002" />
+    	<constructor-arg name="name" value="스마트폰" />
+    	<constructor-arg name="price" value="800000" />
     </bean>
 
-    <!-- ShoppingCart: product1, product2를 포함 -->
+    <!-- ShoppingCart 빈 정의 -->
     <bean id="shoppingCart" class="mylab.order.di.xml.ShoppingCart">
         <property name="products">
             <list>
@@ -27,8 +27,8 @@
             </list>
         </property>
     </bean>
-
-    <!-- OrderService: shoppingCart 주입 -->
+    
+    <!-- OrderService 빈 정의 -->
     <bean id="orderService" class="mylab.order.di.xml.OrderService">
         <property name="shoppingCart" ref="shoppingCart"/>
     </bean>

@@ -1,20 +1,38 @@
 package mylab.order.di.xml;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:mylab-order-di.xml")
 public class OrderSpringTest {
-    public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("mylab-order-di.xml");
+	@Autowired
+	ShoppingCart cart;
+	
+	@Autowired
+	OrderService service;
+    
+    //ShoppingCart 검증
+    @Test
+    public void testShoppingCart() {        
+        assertNotNull(cart);
+        assertEquals(2, cart.getProducts().size());
+        assertEquals("노트북", cart.getProducts().get(0).getName());
+        assertEquals("스마트폰", cart.getProducts().get(1).getName());
+    }
 
-        System.out.println("ShoppingCart 테스트:");
-        ShoppingCart cart = context.getBean("shoppingCart", ShoppingCart.class);
-        System.out.println(cart);
-        System.out.println("총합: " + cart.getTotalPrice() + "원");
-
-        System.out.println("\nOrderService 테스트:");
-        OrderService orderService = context.getBean("orderService", OrderService.class);
-        System.out.println(orderService);
-        System.out.println("주문 총액: " + orderService.calculateOrderTotal() + "원");
+    //OrderService 검증
+    @Test
+    public void testOrderService() {               
+        // 검증
+        assertNotNull(service);
+        assertNotNull(service.getShoppingCart());
+        assertEquals(2300000.0, service.calculateOrderTotal(), 0.001);
     }
 }
