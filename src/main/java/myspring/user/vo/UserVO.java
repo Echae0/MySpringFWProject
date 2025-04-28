@@ -1,5 +1,11 @@
 package myspring.user.vo;
 
+/*
+ * Class(UserV0클래스) <=> Table(users 테이블)
+ * Object <=> Row(Record)
+ * Variable <=> Column
+ */
+
 public class UserVO {
 
 	private Long id;
@@ -10,9 +16,6 @@ public class UserVO {
 
 	public UserVO() {}
 	
-
-
-
 	public UserVO(String userId, String name, String gender, String city) {
 		this.userId = userId;
 		this.name = name;
