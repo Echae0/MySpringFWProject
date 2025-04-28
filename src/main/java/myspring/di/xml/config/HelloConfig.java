@@ -1,5 +1,8 @@
 package myspring.di.xml.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,17 +27,23 @@ public class HelloConfig {
 	
 	@Bean
 	public Printer consolePrinter() {
-		return new ConsolePrinter();	
-				}
-	
+		return new ConsolePrinter();
+	}
 	
 	@Bean
 	public Hello hello() {
-		Hello hello = new Hello(); //alt+shift+l
-		//hello.setName("스프링") env.getProperty("myName1") == "스프링"
+		Hello hello = new Hello(); //alt + shift + l(엘)
+		//hello.setName("스프링")  env.getProperty("myName1") == "스프링"
 		hello.setName(env.getProperty("myName1")); //myName1=스프링
 		hello.setPrinter(stringPrinter());
+		hello.setNames(namesList());
 		return hello;
+	}
+	
+	@Bean
+	public List<String> namesList() {
+		
+		return Arrays.asList("Java","Spring","Kotlin");
 	}
 	
 }
