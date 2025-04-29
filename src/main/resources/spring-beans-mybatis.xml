@@ -33,7 +33,7 @@
 	
 	<!-- SqlSession 설정 constructor injection 방식만 가능함 (기본생성자가 없기 때문에)-->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSessionFactory"/>
-	</bean>
+ 		<constructor-arg ref="sqlSessionFactory" />
+ 	</bean>
 	
 </beans>
